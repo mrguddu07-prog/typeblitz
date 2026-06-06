@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TypeBlitz - A premium typing speed practice game. Test your typing speed, track your WPM, accuracy, and improve your skill level.">
+  <title>TypeBlitz — Typing Speed Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Animated background particles -->
+  <div class="bg-particles" id="bgParticles"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header" id="appHeader">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <h1>Type<span class="accent">Blitz</span></h1>
+      </div>
+      <div class="header-stats">
+        <div class="header-stat" id="bestWpmStat">
+          <span class="header-stat-label">Best WPM</span>
+          <span class="header-stat-value" id="bestWpmValue">—</span>
+        </div>
+        <div class="header-stat" id="totalTestsStat">
+          <span class="header-stat-label">Tests</span>
+          <span class="header-stat-value" id="totalTestsValue">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Speed Level Badge -->
+      <div class="level-badge-container" id="levelBadgeContainer">
+        <div class="level-badge" id="levelBadge">
+          <span class="level-icon" id="levelIcon">🐢</span>
+          <span class="level-text" id="levelText">Ready to type?</span>
+        </div>
+      </div>
+
+      <!-- Live Stats Bar -->
+      <div class="stats-bar" id="statsBar">
+        <div class="stat-card" id="timerCard">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-info">
+            <span class="stat-label">Time</span>
+            <span class="stat-value" id="timerDisplay">0s</span>
+          </div>
+          <div class="stat-ring" id="timerRing">
+            <svg viewBox="0 0 36 36">
+              <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <path class="ring-fill" id="timerRingFill" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100"/>
+            </svg>
+          </div>
+        </div>
+        <div class="stat-card" id="wpmCard">
+          <div class="stat-icon">🚀</div>
+          <div class="stat-info">
+            <span class="stat-label">WPM</span>
+            <span class="stat-value" id="wpmDisplay">0</span>
+          </div>
+        </div>
+        <div class="stat-card" id="accuracyCard">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-info">
+            <span class="stat-label">Accuracy</span>
+            <span class="stat-value" id="accuracyDisplay">100%</span>
+          </div>
+        </div>
+        <div class="stat-card" id="scoreCard">
+          <div class="stat-icon">✨</div>
+          <div class="stat-info">
+            <span class="stat-label">Score</span>
+            <span class="stat-value" id="scoreDisplay">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Difficulty Selector -->
+      <div class="difficulty-selector" id="difficultySelector">
+        <button class="diff-btn active" data-difficulty="easy" id="diffEasy">Easy</button>
+        <button class="diff-btn" data-difficulty="medium" id="diffMedium">Medium</button>
+        <button class="diff-btn" data-difficulty="hard" id="diffHard">Hard</button>
+        <button class="diff-btn" data-difficulty="expert" id="diffExpert">Expert</button>
+        <div class="diff-slider" id="diffSlider"></div>
+      </div>
+
+      <!-- Typing Area -->
+      <div class="typing-zone" id="typingZone">
+        <div class="text-display" id="textDisplay">
+          <!-- Text characters will be rendered here -->
+        </div>
+        <div class="input-wrapper">
+          <textarea class="type-input" id="typeInput" placeholder="Start typing here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+          <div class="input-caret" id="inputCaret"></div>
+        </div>
+        <div class="typing-hint" id="typingHint">
+          <span class="hint-key">Tab</span> to restart &nbsp;·&nbsp; <span class="hint-key">Esc</span> to reset
+        </div>
+      </div>
+
+      <!-- Results Panel (hidden initially) -->
+      <div class="results-panel hidden" id="resultsPanel">
+        <div class="results-header">
+          <h2>🎉 Test Complete!</h2>
+          <div class="results-level" id="resultsLevel">
+            <span class="results-level-icon" id="resultsLevelIcon">🚀</span>
+            <span class="results-level-text" id="resultsLevelText">Speed Demon</span>
+          </div>
+        </div>
+        <div class="results-grid">
+          <div class="result-item result-wpm">
+            <span class="result-number" id="resultWpm">0</span>
+            <span class="result-label">Words/Min</span>
+          </div>
+          <div class="result-item result-accuracy">
+            <span class="result-number" id="resultAccuracy">0%</span>
+            <span class="result-label">Accuracy</span>
+          </div>
+          <div class="result-item result-time">
+            <span class="result-number" id="resultTime">0s</span>
+            <span class="result-label">Time</span>
+          </div>
+          <div class="result-item result-score">
+            <span class="result-number" id="resultScore">0</span>
+            <span class="result-label">Score</span>
+          </div>
+          <div class="result-item result-chars">
+            <span class="result-number" id="resultChars">0</span>
+            <span class="result-label">Characters</span>
+          </div>
+          <div class="result-item result-errors">
+            <span class="result-number" id="resultErrors">0</span>
+            <span class="result-label">Errors</span>
+          </div>
+        </div>
+        <div class="results-chart">
+          <h3>WPM Over Time</h3>
+          <canvas id="wpmChart" width="600" height="180"></canvas>
+        </div>
+        <div class="results-actions">
+          <button class="btn btn-primary" id="btnRetry">
+            <span>🔄</span> Try Again
+          </button>
+          <button class="btn btn-secondary" id="btnNewText">
+            <span>📝</span> New Text
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Speed Level Reference -->
+    <footer class="speed-legend" id="speedLegend">
+      <h3>Speed Levels</h3>
+      <div class="legend-items">
+        <div class="legend-item">
+          <span class="legend-dot" style="--dot-color: #64748b"></span>
+          <span>🐢 Beginner &lt;20</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="--dot-color: #3b82f6"></span>
+          <span>🚶 Average 20-40</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="--dot-color: #8b5cf6"></span>
+          <span>🏃 Fast 40-60</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="--dot-color: #f59e0b"></span>
+          <span>⚡ Pro 60-80</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="--dot-color: #ef4444"></span>
+          <span>🔥 Speed Demon 80-100</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="--dot-color: #ec4899"></span>
+          <span>👑 Legend 100+</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

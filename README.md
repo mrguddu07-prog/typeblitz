@@ -27,13 +27,7 @@
 - **Animated Background** — Floating particles for a premium visual feel
 - **Keyboard Shortcuts** — `Tab` to restart · `Esc` to reset
 - **Fully Responsive** — Works on desktop, tablet, and mobile
-- **Zero Dependencies** — Pure HTML, CSS, and vanilla JavaScript; no frameworks or libraries
-
----
-
-## 📸 Screenshots
-
-> *(Add screenshots of the game UI here after deploying)*
+- **Zero Dependencies** — Pure HTML, CSS, and vanilla JavaScript; no frameworks or librari
 
 ---
 

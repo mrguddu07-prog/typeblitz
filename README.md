@@ -115,10 +115,4 @@ typeblitz/
 
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
 > *Built with ⚡ by Guddu Kumar — because fast fingers need fast feedback.*
